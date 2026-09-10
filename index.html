@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Открытие ссылки</title>
+
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f6f8;
+    font-family: Arial, sans-serif;
+}
+
+.box {
+    width: calc(100% - 40px);
+    max-width: 420px;
+    padding: 28px 22px;
+    background: white;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    color: #666;
+    line-height: 1.5;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: 0;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2787f5;
+    color: white;
+}
+
+.secondary {
+    background: #eef2f5;
+    color: #222;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Открываем ссылку…</h2>
+
+    <p>
+        Если переход не произошёл автоматически,
+        нажмите кнопку ниже.
+    </p>
+
+    <button class="primary" onclick="openLink()">
+        Открыть ссылку
+    </button>
+
+    <button class="secondary" onclick="openExternal()">
+        Открыть во внешнем браузере
+    </button>
+</div>
+
+<script>
+
+const LINKIFY_URL = "https://go.linkify.ru/2Jhk";
+
+function openLink() {
+    window.location.href = LINKIFY_URL;
+}
+
+function openExternal() {
+
+    const url = new URL(LINKIFY_URL);
+
+    const intent =
+        "intent://" +
+        url.host +
+        url.pathname +
+        url.search +
+        url.hash +
+        "#Intent;scheme=" +
+        url.protocol.replace(":", "") +
+        ";action=android.intent.action.VIEW;end";
+
+    window.location.href = intent;
+}
+
+// Автоматический переход
+setTimeout(function() {
+    window.location.href = LINKIFY_URL;
+}, 700);
+
+</script>
+
+</body>
+</html>
